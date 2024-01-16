@@ -11,7 +11,6 @@ import ToasterProvider from '@/providers/ToasterProvider';
 import './globals.css'
 import ClientOnly from './components/ClientOnly';
 import getCurrentUser from '../actions/getCurrentUser';
-import DemoNavbar from './components/DemoNavbar/DemoNavbar';
 import { ClerkProvider, auth } from '@clerk/nextjs';
 
 
@@ -42,7 +41,6 @@ export default async function RootLayout({
           <SearchModal />
           <RentModal />
           <Navbar/>
-          {/* <DemoNavbar /> */}
           {/* currentUser={currentUser} */}
         </ClientOnly>
         <div className="pb-20 pt-28">
