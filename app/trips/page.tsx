@@ -9,9 +9,9 @@ import TripsClient from "./TripsClient";
 import { useUser } from "@clerk/nextjs";
 
 const TripsPage = async () => {
-  const { user } = useUser();
+  const currentUser = await getCurrentUser();
 
-  if (!user) {
+  if (!currentUser) {
     return (
       <ClientOnly>
         <EmptyState
@@ -22,7 +22,7 @@ const TripsPage = async () => {
     );
   }
 
-  // const reservations = await getReservations({ user: userId});
+  const reservations = await getReservations({ userId: currentUser.id });
 
   if (reservations.length === 0) {
     return (
@@ -39,7 +39,7 @@ const TripsPage = async () => {
     <ClientOnly>
       <TripsClient
         reservations={reservations}
-        // user={currentUser}
+        currentUser={currentUser}
       />
     </ClientOnly>
   );

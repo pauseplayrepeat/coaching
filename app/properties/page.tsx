@@ -9,17 +9,16 @@ import PropertiesClient from "./PropertiesClient";
 import { useUser } from "@clerk/nextjs";
 
 const PropertiesPage = async () => {
+  const currentUser = await getCurrentUser();
 
-  const { user } = useUser();
-
-  if (!user) {
+  if (!currentUser) {
     return <EmptyState
       title="Unauthorized"
       subtitle="Please login"
     />
   }
 
-  // const listings = await getListings({ u });
+  const listings = await getListings({ userId: currentUser.id });
 
   if (listings.length === 0) {
     return (
@@ -36,7 +35,7 @@ const PropertiesPage = async () => {
     <ClientOnly>
       <PropertiesClient
         listings={listings}
-        // currentUser={currentUser}
+        currentUser={currentUser}
       />
     </ClientOnly>
   );
