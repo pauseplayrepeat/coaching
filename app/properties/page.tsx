@@ -2,22 +2,24 @@
 import EmptyState from "@/app/components/EmptyState";
 import ClientOnly from "@/app/components/ClientOnly";
 
-import getCurrentUser from "@/app/actions/getCurrentUser";
-import getListings from "@/app/actions/getListings";
+import getCurrentUser from "@/actions/getCurrentUser";
+import getListings from "@/actions/getListings";
 
 import PropertiesClient from "./PropertiesClient";
+import { useUser } from "@clerk/nextjs";
 
 const PropertiesPage = async () => {
-  const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
+  const { user } = useUser();
+
+  if (!user) {
     return <EmptyState
       title="Unauthorized"
       subtitle="Please login"
     />
   }
 
-  const listings = await getListings({ userId: currentUser.id });
+  // const listings = await getListings({ u });
 
   if (listings.length === 0) {
     return (
@@ -34,7 +36,7 @@ const PropertiesPage = async () => {
     <ClientOnly>
       <PropertiesClient
         listings={listings}
-        currentUser={currentUser}
+        // currentUser={currentUser}
       />
     </ClientOnly>
   );

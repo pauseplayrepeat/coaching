@@ -2,15 +2,16 @@
 import EmptyState from "@/app/components/EmptyState";
 import ClientOnly from "@/app/components/ClientOnly";
 
-import getCurrentUser from "@/app/actions/getCurrentUser";
-import getReservations from "@/app/actions/getReservations";
+import getCurrentUser from "@/actions/getCurrentUser";
+import getReservations from "@/actions/getReservations";
 
 import TripsClient from "./TripsClient";
+import { useUser } from "@clerk/nextjs";
 
 const TripsPage = async () => {
-  const currentUser = await getCurrentUser();
+  const { user } = useUser();
 
-  if (!currentUser) {
+  if (!user) {
     return (
       <ClientOnly>
         <EmptyState
@@ -21,7 +22,7 @@ const TripsPage = async () => {
     );
   }
 
-  const reservations = await getReservations({ userId: currentUser.id });
+  // const reservations = await getReservations({ user: userId});
 
   if (reservations.length === 0) {
     return (
@@ -38,7 +39,7 @@ const TripsPage = async () => {
     <ClientOnly>
       <TripsClient
         reservations={reservations}
-        currentUser={currentUser}
+        // user={currentUser}
       />
     </ClientOnly>
   );

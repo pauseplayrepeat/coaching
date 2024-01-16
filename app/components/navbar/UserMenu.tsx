@@ -5,13 +5,14 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import useLoginModal from "@/app/hooks/useLoginModal";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
-import useRentModal from "@/app/hooks/useRentModal";
-import { SafeUser } from "@/app/types";
+import useLoginModal from "@/hooks/useLoginModal";
+import useRegisterModal from "@/hooks/useRegisterModal";
+import useRentModal from "@/hooks/useRentModal";
+import { SafeUser } from "@/types";
 
 import MenuItem from "./MenuItem";
 import Avatar from "../Avatar";
+import { SignInButton, auth, useUser } from "@clerk/nextjs";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null
@@ -21,24 +22,26 @@ const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
   const router = useRouter();
-
+  const { user } = useUser();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const rentModal = useRentModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
+  // const { userId } = auth();
+
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
   const onRent = useCallback(() => {
-    if (!currentUser) {
+    if (!user) {
       return loginModal.onOpen();
     }
 
     rentModal.onOpen();
-  }, [loginModal, rentModal, currentUser]);
+  }, [loginModal, rentModal, user]);
 
   return ( 
     <div className="relative">
@@ -58,7 +61,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             cursor-pointer
           "
         >
-          Airbnb your home
+          Register as a coach
         </div>
         <div 
         onClick={toggleOpen}
@@ -79,9 +82,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
           "
         >
           <AiOutlineMenu />
-          <div className="hidden md:block">
+          {/* <div className="hidden md:block">
             <Avatar src={currentUser?.image} />
-          </div>
+          </div> */}
         </div>
       </div>
       {isOpen && (
@@ -100,7 +103,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
           "
         >
           <div className="flex flex-col cursor-pointer">
-            {currentUser ? (
+            {user ? (
               <>
                 <MenuItem 
                   label="My trips" 
@@ -119,7 +122,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   onClick={() => router.push('/properties')}
                 />
                 <MenuItem 
-                  label="Airbnb your home" 
+                  label="Register as a coach" 
                   onClick={rentModal.onOpen}
                 />
                 <hr />
@@ -130,14 +133,15 @@ const UserMenu: React.FC<UserMenuProps> = ({
               </>
             ) : (
               <>
-                <MenuItem 
+                {/* <MenuItem 
                   label="Login" 
                   onClick={loginModal.onOpen}
                 />
                 <MenuItem 
                   label="Sign up" 
                   onClick={registerModal.onOpen}
-                />
+                /> */}
+                <SignInButton />
               </>
             )}
           </div>

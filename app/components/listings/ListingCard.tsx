@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from 'date-fns';
 
-import useCountries from "@/app/hooks/useCountries";
+import useCountries from "@/hooks/useCountries";
 import { 
   SafeListing, 
   SafeReservation, 
   SafeUser 
-} from "@/app/types";
+} from "@/types";
 
 import HeartButton from "../HeartButton";
 import Button from "../Button";
@@ -72,7 +72,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
   return (
     <div 
-      onClick={() => router.push(`/listings/${data.id}`)} 
+      onClick={() => router.push(`/coach/${data.id}`)} 
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">

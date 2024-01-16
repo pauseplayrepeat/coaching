@@ -4,8 +4,8 @@ import EmptyState from "@/app/components/EmptyState";
 
 import getListings, { 
   IListingsParams
-} from "@/app/actions/getListings";
-import getCurrentUser from "@/app/actions/getCurrentUser";
+} from "@/actions/getListings";
+import getCurrentUser from "@/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 
 interface HomeProps {
@@ -42,7 +42,7 @@ const Home = async ({ searchParams }: HomeProps) => {
         >
           {listings.map((listing: any) => (
             <ListingCard
-              currentUser={currentUser}
+              // currentUser={currentUser}
               key={listing.id}
               data={listing}
             />

@@ -1,14 +1,13 @@
 import { NextResponse } from 'next/server';
 
-import prisma from '@/app/libs/prismadb';
-import getCurrentUser from '@/app/actions/getCurrentUser';
+import prisma from '@/libs/prismadb';
+import getCurrentUser from '@/actions/getCurrentUser';
+import { auth } from '@clerk/nextjs';
 
-export async function POST(
-    request: Request
-) {
-    const currentUser = await getCurrentUser();
+export async function POST(request: Request) {
+    const { userId } = auth();
 
-    if (!currentUser) {
+    if (!userId) {
         return NextResponse.error();
     }
 
@@ -18,26 +17,25 @@ export async function POST(
         description,
         imageSrc,
         category,
-        roomCount,
-        bathroomCount,
-        guestCount,
         location,
         price,
+        experience, // new field
+        expertise, // new field
+        sessionLength, // new field
     } = body;
 
-    const isting = await prisma.listing.create({
+    const listing = await prisma.listing.create({
         data: {
             title,
             description,
             imageSrc,
             category,
-            roomCount,
-            bathroomCount,
-            guestCount,
             locationValue: location.value,
             price: parseInt(price, 10),
-            userId: currentUser.id
+            userId,
+            experience: parseInt(experience, 10),
+            expertise, // new field
+            sessionLength: parseInt(sessionLength, 10),
         },
     });
-
 }

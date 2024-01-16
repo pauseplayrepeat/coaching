@@ -19,83 +19,65 @@ import { MdOutlineVilla } from 'react-icons/md';
 
 import CategoryBox from "@/app/components/CategoryBox";
 import Container from '../Container';
-
+import { 
+  GiMicrophone, 
+  GiPianoKeys, 
+  GiDrum, 
+  GiGuitar, 
+  GiSaxophone, 
+  GiViolin, 
+  GiMusicSpell,
+  GiSoundWaves,
+  GiMusicalNotes,
+  GiBriefcase,
+  GiSoundOff
+} from 'react-icons/gi';
 
 export const categories = [
   {
-    label: 'Beach',
-    icon: TbBeach,
-    description: 'This property is close to the beach!',
+    label: 'Ableton',
+    icon: GiMusicalNotes,
+    description: 'Coaching for Ableton Live software!',
   },
   {
-    label: 'Windmills',
-    icon: GiWindmill,
-    description: 'This property is has windmills!',
+    label: 'FL Studio',
+    icon: GiSoundWaves,
+    description: 'Learn FL Studio techniques and music production!',
   },
   {
-    label: 'Modern',
-    icon: MdOutlineVilla,
-    description: 'This property is modern!'
+    label: 'Mixing',
+    icon: GiSoundOff,
+    description: 'Master the art of mixing and sound balancing!',
   },
   {
-    label: 'Countryside',
-    icon: TbMountain,
-    description: 'This property is in the countryside!'
+    label: 'Mastering',
+    icon: GiSoundWaves,
+    description: 'Learn the final step of music production - Mastering!',
   },
   {
-    label: 'Pools',
-    icon: TbPool,
-    description: 'This is property has a beautiful pool!'
+    label: 'Vocal Production',
+    icon: GiMicrophone,
+    description: 'Learn techniques for recording and producing vocals!',
   },
   {
-    label: 'Islands',
-    icon: GiIsland,
-    description: 'This property is on an island!'
+    label: 'Drum Programming',
+    icon: GiDrum,
+    description: 'Master the art of drum programming for electronic music!',
   },
   {
-    label: 'Lake',
-    icon: GiBoatFishing,
-    description: 'This property is near a lake!'
+    label: 'Synthesis',
+    icon: GiViolin,
+    description: 'Learn about sound synthesis and designing your own sounds!',
   },
   {
-    label: 'Skiing',
-    icon: FaSkiing,
-    description: 'This property has skiing activies!'
+    label: 'Sound Design',
+    icon: GiMusicSpell,
+    description: 'Learn about sound design for music and multimedia projects!',
   },
   {
-    label: 'Castles',
-    icon: GiCastle,
-    description: 'This property is an ancient castle!'
-  },
-  {
-    label: 'Caves',
-    icon: GiCaveEntrance,
-    description: 'This property is in a spooky cave!'
-  },
-  {
-    label: 'Camping',
-    icon: GiForestCamp,
-    description: 'This property offers camping activities!'
-  },
-  {
-    label: 'Arctic',
-    icon: BsSnow,
-    description: 'This property is in arctic environment!'
-  },
-  {
-    label: 'Desert',
-    icon: GiCactus,
-    description: 'This property is in the desert!'
-  },
-  {
-    label: 'Barns',
-    icon: GiBarn,
-    description: 'This property is in a barn!'
-  },
-  {
-    label: 'Lux',
-    icon: IoDiamond,
-    description: 'This property is brand new and luxurious!'
+    label: 'Marketing',
+    icon: GiBriefcase,
+    description: 'Learn how to market your music and build your brand!'
   }
 ]
 

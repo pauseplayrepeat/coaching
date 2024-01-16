@@ -6,15 +6,18 @@ import RegisterModal from '@/app/components/modals/RegisterModal';
 import SearchModal from '@/app/components/modals/SearchModal';
 import RentModal from '@/app/components/modals/RentModal';
 
-import ToasterProvider from '@/app/providers/ToasterProvider';
+import ToasterProvider from '@/providers/ToasterProvider';
 
 import './globals.css'
 import ClientOnly from './components/ClientOnly';
-import getCurrentUser from './actions/getCurrentUser';
+import getCurrentUser from '../actions/getCurrentUser';
+import DemoNavbar from './components/DemoNavbar/DemoNavbar';
+import { ClerkProvider, auth } from '@clerk/nextjs';
+
 
 export const metadata = {
-  title: 'Airbnb',
-  description: 'Airbnb Clone',
+  title: 'PausePlayRepeat Coaching',
+  description: 'Music Production Coaching',
 }
 
 const font = Nunito({ 
@@ -26,9 +29,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const currentUser = await getCurrentUser();
+  const { userId } = auth();
 
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
@@ -37,12 +41,15 @@ export default async function RootLayout({
           <RegisterModal />
           <SearchModal />
           <RentModal />
-          <Navbar currentUser={currentUser} />
+          <Navbar/>
+          {/* <DemoNavbar /> */}
+          {/* currentUser={currentUser} */}
         </ClientOnly>
         <div className="pb-20 pt-28">
           {children}
         </div>
       </body>
     </html>
+    </ClerkProvider>
   )
 }
