@@ -7,14 +7,14 @@ import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
-import { UserButton, useUser } from "@clerk/nextjs";
 
+interface NavbarProps {
+  currentUser?: SafeUser | null;
+}
 
-const Navbar: React.FC = ({
+const Navbar: React.FC<NavbarProps> = ({
+  currentUser,
 }) => {
-
-  const { user } = useUser();
-
   return ( 
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div
@@ -36,8 +36,7 @@ const Navbar: React.FC = ({
         >
           <Logo />
           <Search />
-          <UserMenu />
-          {/* <UserButton /> */}
+          <UserMenu currentUser={currentUser} />
         </div>
       </Container>
     </div>

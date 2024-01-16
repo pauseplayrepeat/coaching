@@ -11,7 +11,7 @@ import ToasterProvider from '@/providers/ToasterProvider';
 import './globals.css'
 import ClientOnly from './components/ClientOnly';
 import getCurrentUser from '../actions/getCurrentUser';
-import { ClerkProvider, auth } from '@clerk/nextjs';
+
 
 
 export const metadata = {
@@ -28,10 +28,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { userId } = auth();
+
+  const currentUser = await getCurrentUser();
 
   return (
-    <ClerkProvider>
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
@@ -40,14 +40,12 @@ export default async function RootLayout({
           <RegisterModal />
           <SearchModal />
           <RentModal />
-          <Navbar/>
-          {/* currentUser={currentUser} */}
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
         <div className="pb-20 pt-28">
           {children}
         </div>
       </body>
     </html>
-    </ClerkProvider>
   )
 }
