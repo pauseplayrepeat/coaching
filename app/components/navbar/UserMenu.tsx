@@ -22,26 +22,24 @@ const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
   const router = useRouter();
-  const { user } = useUser();
+
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const rentModal = useRentModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // const { userId } = auth();
-
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
   const onRent = useCallback(() => {
-    if (!user) {
+    if (!currentUser) {
       return loginModal.onOpen();
     }
 
     rentModal.onOpen();
-  }, [loginModal, rentModal, user]);
+  }, [loginModal, rentModal, currentUser]);
 
   return ( 
     <div className="relative">
@@ -61,7 +59,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             cursor-pointer
           "
         >
-          Register as a coach
+          Airbnb your home
         </div>
         <div 
         onClick={toggleOpen}
@@ -82,9 +80,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
           "
         >
           <AiOutlineMenu />
-          {/* <div className="hidden md:block">
+          <div className="hidden md:block">
             <Avatar src={currentUser?.image} />
-          </div> */}
+          </div>
         </div>
       </div>
       {isOpen && (
@@ -103,7 +101,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
           "
         >
           <div className="flex flex-col cursor-pointer">
-            {user ? (
+            {currentUser ? (
               <>
                 <MenuItem 
                   label="My trips" 
@@ -122,7 +120,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   onClick={() => router.push('/properties')}
                 />
                 <MenuItem 
-                  label="Register as a coach" 
+                  label="Airbnb your home" 
                   onClick={rentModal.onOpen}
                 />
                 <hr />
@@ -133,15 +131,14 @@ const UserMenu: React.FC<UserMenuProps> = ({
               </>
             ) : (
               <>
-                {/* <MenuItem 
+                <MenuItem 
                   label="Login" 
                   onClick={loginModal.onOpen}
                 />
                 <MenuItem 
                   label="Sign up" 
                   onClick={registerModal.onOpen}
-                /> */}
-                <SignInButton />
+                />
               </>
             )}
           </div>
