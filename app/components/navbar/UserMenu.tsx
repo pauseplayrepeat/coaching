@@ -12,7 +12,6 @@ import { SafeUser } from "@/types";
 
 import MenuItem from "./MenuItem";
 import Avatar from "../Avatar";
-import { SignInButton, auth, useUser } from "@clerk/nextjs";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null
