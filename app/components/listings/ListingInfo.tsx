@@ -3,11 +3,11 @@
 import dynamic from "next/dynamic";
 import { IconType } from "react-icons";
 
-import useCountries from "@/hooks/useCountries";
-import { SafeUser } from "@/types";
 
 import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
+import { SafeUser } from "@/types";
+import useCountries from "@/hooks/useCountries";
 
 const Map = dynamic(() => import('../Map'), { 
   ssr: false 
@@ -16,6 +16,9 @@ const Map = dynamic(() => import('../Map'), {
 interface ListingInfoProps {
   user: SafeUser,
   description: string;
+  guestCount: number;
+  roomCount: number;
+  bathroomCount: number;
   category: {
     icon: IconType,
     label: string;
@@ -27,6 +30,9 @@ interface ListingInfoProps {
 const ListingInfo: React.FC<ListingInfoProps> = ({
   user,
   description,
+  guestCount,
+  roomCount,
+  bathroomCount,
   category,
   locationValue,
 }) => {
@@ -47,10 +53,10 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
             gap-2
           "
         >
-          <div>{user?.name}</div>
-          {/* <Avatar src={user?.image} /> */}
+          <div>Hosted by {user?.name}</div>
+          <Avatar src={user?.image} />
         </div>
-        {/* <div className="
+        <div className="
             flex 
             flex-row 
             items-center 
@@ -68,7 +74,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           <div>
             {bathroomCount} bathrooms
           </div>
-        </div> */}
+        </div>
       </div>
       <hr />
       {category && (
@@ -84,7 +90,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         {description}
       </div>
       <hr />
-      {/* <Map center={coordinates} /> */}
+      <Map center={coordinates} />
     </div>
    );
 }

@@ -7,14 +7,14 @@ import { Range } from "react-date-range";
 import { useRouter } from "next/navigation";
 import { differenceInDays, eachDayOfInterval } from 'date-fns';
 
-import useLoginModal from "@/hooks/useLoginModal";
-import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
 import Container from "@/app/components/Container";
 import { categories } from "@/app/components/navbar/Categories";
 import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
 import ListingReservation from "@/app/components/listings/ListingReservation";
+import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import useLoginModal from "@/hooks/useLoginModal";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -139,6 +139,9 @@ const ListingClient: React.FC<ListingClientProps> = ({
               user={listing.user}
               category={category}
               description={listing.description}
+              roomCount={listing.roomCount}
+              guestCount={listing.guestCount}
+              bathroomCount={listing.bathroomCount}
               locationValue={listing.locationValue}
             />
             <div 
