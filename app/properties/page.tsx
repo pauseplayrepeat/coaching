@@ -6,7 +6,6 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import getListings from "@/actions/getListings";
 
 import PropertiesClient from "./PropertiesClient";
-import { useUser } from "@clerk/nextjs";
 
 const PropertiesPage = async () => {
   const currentUser = await getCurrentUser();

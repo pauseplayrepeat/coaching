@@ -6,7 +6,6 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import getReservations from "@/actions/getReservations";
 
 import TripsClient from "./TripsClient";
-import { useUser } from "@clerk/nextjs";
 
 const TripsPage = async () => {
   const currentUser = await getCurrentUser();
